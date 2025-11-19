@@ -2,10 +2,15 @@ package com.in28minutes.rest.webservices.restfull_web_services.user;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
+
 
 public class User {
 	private int id;
+	@Size(min = 2, message = "name should have at leadst 2 characters")
 	private String name;
+	@Past(message = "birthdate should be in paset")
 	private LocalDate birthDate;
 
 	public User(int id, String name, LocalDate birthDate) {

@@ -22,4 +22,12 @@ public class HelloWorldController {
 	public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
 		return new HelloWorldBean(String.format("hello world, %s", name));
 	}
+	
+	@GetMapping(path = "/hello-world-internationalized")
+	public String helloWorldInternationalized() {
+		return "Hello World";
+	//1: define
+	//2: pick the code
+	
+	}
 }
