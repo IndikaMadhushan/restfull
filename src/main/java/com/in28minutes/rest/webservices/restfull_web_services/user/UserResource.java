@@ -35,18 +35,16 @@ public class UserResource {
 		User user = service.findOne(id);
 
 		if (user == null) {
-			throw new UserNotFoundException("id" + id);
+			throw new UserNotFoundException("id: " + id);
 		}
 
 		return user;
 	}
-	
+
 	@DeleteMapping("/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		service.deleteById(id);
 	}
-	
-	
 
 	// POST /users
 	@RequestMapping("/users")
