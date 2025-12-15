@@ -1,17 +1,36 @@
 package com.in28minutes.rest.webservices.restfull_web_services.user;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.annotation.Generated;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 
-
+@Entity(name = "user_details")
 public class User {
+	protected User() {}
+	
+	@Id
+	@GeneratedValue
 	private int id;
 	@Size(min = 2, message = "name should have at leadst 2 characters")
+	@JsonProperty("user_name")
 	private String name;
 	@Past(message = "birthdate should be in paset")
+	@JsonProperty("birth_date")
 	private LocalDate birthDate;
+	
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Post> posts;
 
 	public User(int id, String name, LocalDate birthDate) {
 		super();
@@ -42,6 +61,14 @@ public class User {
 
 	public void setBirthDate(LocalDate birthDate) {
 		this.birthDate = birthDate;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	@Override
